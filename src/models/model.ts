@@ -37,6 +37,12 @@ export function expirePlugin(schema: Schema, options: { expires: number }): void
   });
 }
 
+/**
+ * Creates the comment schema.
+ * 
+ * @param container Services container
+ * @returns Comment schema
+ */
 export function createCommentSchema() {
   const schema = new Schema({
     content: {
