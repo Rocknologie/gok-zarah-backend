@@ -1,7 +1,8 @@
 import { Document, Model, Mongoose, Schema } from "mongoose";
 import ServiceContainer from "../services/service-container";
-import Attributes, { CommentAttributes, createCommentSchema } from "./model";
+import Attributes from "./model";
 import mongooseToJson from '@meanie/mongoose-to-json';
+import { CommentInstance } from "./coment-model";
 
 /*
  * Theory attributes.
@@ -9,7 +10,7 @@ import mongooseToJson from '@meanie/mongoose-to-json';
 export interface TheoryAttributes extends Attributes {
   title: string;
   content: string;
-  comments: CommentAttributes[];
+  comments: CommentInstance[];
 }
 
 /*
@@ -45,7 +46,8 @@ function createTheorySchema(container: ServiceContainer) {
     },
     comments: {
       type: [{
-        type: createCommentSchema()
+        type: Schema.Types.ObjectId,
+        ref: 'Comment'
       }],
       default: []
     }
